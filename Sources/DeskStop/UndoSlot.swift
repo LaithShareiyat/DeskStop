@@ -20,10 +20,15 @@ struct UndoSnapshot: Codable {
 /// invoking undo twice toggles between the two arrangements).
 final class UndoSlotStore {
     private let fileURL: URL
-    /// In-memory copy; this store is the file's only writer, so the cache is
-    /// authoritative after first read. The snapshot holds every icon's
-    /// position — re-decoding it on each menu rebuild would be wasted I/O.
-    private var cache: UndoSnapshot??
+    /// In-memory copy, shared by every instance: the Shortcuts and Focus
+    /// restores build their own store, and the app's must see what they
+    /// stash. The snapshot holds every icon's position — re-decoding it on
+    /// each menu rebuild would be wasted I/O. Main thread only.
+    private static var cache: UndoSnapshot??
+    private var cache: UndoSnapshot?? {
+        get { Self.cache }
+        set { Self.cache = newValue }
+    }
 
     init() {
         let dir = DataFolder.ensured()
