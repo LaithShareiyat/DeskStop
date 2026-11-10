@@ -986,7 +986,7 @@ private struct BackupSettings: View {
             }
             Divider()
             SettingsRow(symbol: "square.and.arrow.down", title: "Import",
-                        caption: "Adds layouts from an exported file. Nothing is overwritten.") {
+                        caption: "Brings back the layouts, schedules, shortcuts and settings in an exported file. They replace your current versions of the same ones.") {
                 Button("Import", action: actions.importSettings)
             }
         }

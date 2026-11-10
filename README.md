@@ -25,7 +25,7 @@ The problem affects desktops you arrange yourself. If yours uses one of macOS's 
 - **Keyboard shortcuts.** Give any layout its own shortcut, step through the layouts for your current displays, or hide your icons.
 - **Hide desktop icons.** Cover your icons with your wallpaper or a picture you choose, until you show them again.
 - **Schedules.** Restore a layout on chosen days of the week or on chosen dates. A schedule runs only while its display setup is connected, and is skipped if the Mac was asleep.
-- **Backup.** Export your layouts, schedules, shortcuts and settings to a file. Importing adds layouts and overwrites nothing.
+- **Backup.** Export your layouts, schedules, shortcuts and settings to a file. Importing brings them back, replacing your current versions of the same layouts and settings.
 
 Two features are still experimental, and are marked Beta in the app:
 
