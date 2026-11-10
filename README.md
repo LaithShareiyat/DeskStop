@@ -2,9 +2,9 @@
 
 **When you dock or undock your Mac from an external monitor, macOS can change which display is your main one, leaving the icons and folders on your desktop rearranged and stacked on top of each other.**
 
-This happens when you arrange your icons yourself. If your desktop uses one of macOS's automatic options, such as Sort By Name or Tags, macOS keeps the icons in order for you, and DeskStop can't move them.
-
 DeskStop fixes that. It's a free menu bar app that saves how your desktop is arranged for each display setup and puts it back, automatically if you want, whenever your displays change.
+
+The problem affects desktops you arrange yourself. If yours uses one of macOS's automatic options, such as Sort By Name or Tags, macOS keeps the icons in order for you, and DeskStop can't move them.
 
 <p align="center">
   <img src="docs/images/demo.gif" width="800" alt="Animation of desktop icons piling up when a monitor is unplugged, and DeskStop putting them back">
