@@ -296,8 +296,12 @@ enum IconArrangement {
         var errorDict: NSDictionary?
         let result = script.executeAndReturnError(&errorDict)
         if let err = errorDict {
-            throw NSError(domain: "DeskStop.AppleScript", code: -2,
-                          userInfo: err as? [String: Any])
+            var info = err as? [String: Any] ?? [:]
+            // -1743: the user hasn't allowed DeskStop to control Finder.
+            info[NSLocalizedDescriptionKey] = err[NSAppleScript.errorNumber] as? Int == -1743
+                ? "DeskStop isn't allowed to control Finder. Turn on Finder access in Settings › Permissions."
+                : err[NSAppleScript.errorMessage] as? String ?? "Finder returned an error."
+            throw NSError(domain: "DeskStop.AppleScript", code: -2, userInfo: info)
         }
         return result.stringValue ?? ""
     }

@@ -207,6 +207,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             let settings = FinderSettings.read()
             guard settings.positionsAreEditable else {
                 NSLog("DeskStop auto-restore skipped: positions not editable for \(newConfig.label)")
+                notifySuccess(title: "Auto-restore of \u{201C}\(preset.name)\u{201D} skipped",
+                              body: "The desktop is sorted, so icons can't be moved.")
                 return
             }
         }
@@ -267,6 +269,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             }
         } catch {
             NSLog("DeskStop auto-restore failed: \(error)")
+            notifySuccess(title: "Couldn't auto-restore \u{201C}\(preset.name)\u{201D}",
+                          body: "Icons couldn't be moved. \(error.localizedDescription)")
         }
     }
 
