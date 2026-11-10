@@ -18,10 +18,6 @@ DeskStop fixes that. It's a free menu bar app that saves how your desktop is arr
 
 ## What it does
 
-<p align="center">
-  <img src="docs/images/setup-demo.gif" width="800" alt="Animation of a DeskStop layout putting displays back in the right order and opening saved apps">
-</p>
-
 - **Layouts for each display setup.** DeskStop keeps separate layouts for each combination of displays, so your laptop-only desktop and your docked desktop stay separate.
 - **Choose what a layout restores.** Icon positions, where each display sits and which is main, resolution and refresh rate, and a list of apps to open. Each one is optional.
 - **Auto-restore.** Pick one layout per display setup, and DeskStop restores it when you switch to those displays.
