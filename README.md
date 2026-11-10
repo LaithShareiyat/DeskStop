@@ -2,7 +2,13 @@
 
 **When you dock or undock your Mac from an external monitor, macOS can change which display is your main one, leaving the icons and folders on your desktop rearranged and stacked on top of each other.**
 
+This happens when you arrange your icons yourself. If your desktop uses one of macOS's automatic options, such as Sort By Name or Tags, macOS keeps the icons in order for you, and DeskStop can't move them.
+
 DeskStop fixes that. It's a free menu bar app that saves how your desktop is arranged for each display setup and puts it back, automatically if you want, whenever your displays change.
+
+<p align="center">
+  <img src="docs/images/demo.gif" width="800" alt="Animation of desktop icons piling up when a monitor is unplugged, and DeskStop putting them back">
+</p>
 
 <p align="center">
   <img src="docs/images/panel-layouts.png" width="260" alt="The DeskStop menu bar panel listing three saved layouts for the connected displays">
@@ -11,6 +17,10 @@ DeskStop fixes that. It's a free menu bar app that saves how your desktop is arr
 <p align="center"><sub>Interface design inspired by <a href="https://github.com/vorssaint/vorssaint-utils">Vorssaint</a>, the popular Mac menu bar app.</sub></p>
 
 ## What it does
+
+<p align="center">
+  <img src="docs/images/setup-demo.gif" width="800" alt="Animation of a DeskStop layout putting displays back in the right order and opening saved apps">
+</p>
 
 - **Layouts for each display setup.** DeskStop keeps separate layouts for each combination of displays, so your laptop-only desktop and your docked desktop stay separate.
 - **Choose what a layout restores.** Icon positions, where each display sits and which is main, resolution and refresh rate, and a list of apps to open. Each one is optional.
