@@ -1,0 +1,51 @@
+name: Release
+
+# Push a tag like v1.2.0 (Scripts/bump-version.sh makes one) and this builds
+# the app, zips it, and publishes a GitHub Release. The app's built-in
+# updater reads the latest release, so publishing is all it takes to ship.
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check the tag matches Info.plist
+        run: |
+          TAG="${GITHUB_REF_NAME#v}"
+          PLIST="$(/usr/libexec/PlistBuddy -c 'Print :CFBundleShortVersionString' Resources/Info.plist)"
+          if [[ "$TAG" != "$PLIST" ]]; then
+            echo "::error::Tag $GITHUB_REF_NAME does not match Info.plist version $PLIST. Use Scripts/bump-version.sh."
+            exit 1
+          fi
+          echo "VERSION=$TAG" >> "$GITHUB_ENV"
+
+      - name: Test
+        run: swift test
+
+      - name: Build app
+        run: ./Scripts/build-app.sh
+
+      - name: Package
+        run: |
+          # ditto, not zip: it keeps the code signature and extended attributes,
+          # and --keepParent puts DeskStop.app at the root, where the updater
+          # looks for it.
+          ditto -c -k --keepParent build/DeskStop.app "build/DeskStop-$VERSION.zip"
+          (cd build && shasum -a 256 "DeskStop-$VERSION.zip" > "DeskStop-$VERSION.zip.sha256")
+
+      - name: Publish
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "$GITHUB_REF_NAME" \
+            --title "DeskStop $VERSION" \
+            --generate-notes \
+            "build/DeskStop-$VERSION.zip" \
+            "build/DeskStop-$VERSION.zip.sha256"
