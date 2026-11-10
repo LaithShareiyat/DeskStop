@@ -8,6 +8,7 @@ DeskStop fixes that. It's a free menu bar app that saves how your desktop is arr
   <img src="docs/images/panel-layouts.png" width="260" alt="The DeskStop menu bar panel listing three saved layouts for the connected displays">
   <img src="docs/images/panel-desktop.png" width="260" alt="The Desktop tab of the panel, with controls to hide desktop icons and restore the next layout">
 </p>
+<p align="center"><sub>Interface design inspired by <a href="https://github.com/vorssaint/vorssaint-utils">Vorssaint</a>, the popular Mac menu bar app.</sub></p>
 
 ## What it does
 
@@ -108,7 +109,7 @@ Use Settings › Feedback in the app, or [open an issue](https://github.com/Lait
 
 ## Support
 
-If DeskStop saves you time, you can buy me a coffee.
+DeskStop is free. If it's saved you from tidying your desktop one more time, a coffee would be very much appreciated. Thank you!
 
 <p align="center">
   <a href="https://www.buymeacoffee.com/LaithSh"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" width="280" alt="Buy Me a Coffee"></a>
