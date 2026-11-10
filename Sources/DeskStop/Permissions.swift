@@ -8,7 +8,7 @@ enum PermissionStatus {
     case denied         // User said no — must visit System Settings to undo
 }
 
-/// Status + request helpers for the three permissions DeskStop needs.
+/// Status + request helpers for the two permissions DeskStop needs.
 enum Permissions {
 
     // MARK: - Finder Automation (AppleEvents)
@@ -122,24 +122,6 @@ enum Permissions {
         }
         return process.terminationStatus == 0
     }
-
-    // MARK: - Accessibility (for global hotkeys)
-
-    static func accessibilityStatus() -> PermissionStatus {
-        // `AXIsProcessTrustedWithOptions(nil)` returns the current state
-        // without prompting and without leaning on the cached value
-        // `AXIsProcessTrusted()` sometimes serves stale.
-        return AXIsProcessTrustedWithOptions(nil) ? .granted : .notDetermined
-    }
-
-    /// Opens System Settings → Privacy & Security → Accessibility. We don't also
-    /// call `AXIsProcessTrustedWithOptions(prompt: true)`: its prompt leads to the
-    /// same pane and the two would stack. The user must flip the toggle.
-    static func requestAccessibility() {
-        if let url = URL(string: "x-apple.systempreferences:com.apple.preference.security?Privacy_Accessibility") {
-            NSWorkspace.shared.open(url)
-        }
-    }
 }
 
 extension UserDefaults {
@@ -152,8 +134,7 @@ extension UserDefaults {
 }
 
 enum AppRelaunch {
-    /// Spawns a fresh instance of this .app, then terminates this one. Accessibility
-    /// trust only takes effect for processes launched after the toggle. The brief
+    /// Spawns a fresh instance of this .app, then terminates this one. The brief
     /// wait lets the new process claim the menu-bar slot, so the icon flickers
     /// rather than vanishes.
     static func relaunchApp() {
