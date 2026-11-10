@@ -25,6 +25,10 @@ public struct RestorePlan: Equatable {
     /// about whether displays can be moved or apps launched.
     public var requiresEditableFinder: Bool { writesIcons }
 
+    /// Icon and display positions only fit the displays they were saved for;
+    /// opening apps works on any.
+    public var requiresMatchingDisplays: Bool { writesIcons || movesDisplays }
+
     /// Nothing would happen.
     public var isEmpty: Bool { !writesIcons && !movesDisplays && !launchesApps }
 

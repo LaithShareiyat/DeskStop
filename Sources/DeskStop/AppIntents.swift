@@ -111,6 +111,11 @@ enum LayoutRestorer {
         guard !plan.isEmpty else {
             throw DesktopPresetIntentError.emptyArrangement(name: stored.name)
         }
+        let current = DisplayConfiguration.current()
+        if plan.requiresMatchingDisplays, stored.categoryKey != current.key {
+            throw DesktopPresetIntentError.wrongDisplaySetup(presetLabel: stored.displaySetupName,
+                                                             currentLabel: current.displayName)
+        }
         // Peek before launching apps, so a rejected restore opens nothing.
         guard !DisplayArrangementApplier.isBusy else {
             throw DesktopPresetIntentError.restoreInProgress

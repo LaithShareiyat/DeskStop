@@ -22,6 +22,14 @@ final class RestorePlanTests: XCTestCase {
         XCTAssertFalse(plan.requiresEditableFinder)
     }
 
+    // MARK: - Display setup guard
+
+    func testOnlyAppsOnlyRestoreRunsOnOtherDisplays() {
+        XCTAssertTrue(RestorePlan(writesIcons: true, movesDisplays: false, launchesApps: true).requiresMatchingDisplays)
+        XCTAssertTrue(RestorePlan(writesIcons: false, movesDisplays: true, launchesApps: false).requiresMatchingDisplays)
+        XCTAssertFalse(RestorePlan(writesIcons: false, movesDisplays: false, launchesApps: true).requiresMatchingDisplays)
+    }
+
     // MARK: - Nothing to do
 
     func testNothingSwitchedOnIsEmpty() {

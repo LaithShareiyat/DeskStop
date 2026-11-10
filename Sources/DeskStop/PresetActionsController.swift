@@ -458,12 +458,21 @@ final class PresetActionsController: NSObject {
                         style: .warning)
             return
         }
+        let plan = preset.restorePlan
+        // Before anything runs: a hotkey, link or the panel's other-setups
+        // list can ask for a layout saved for displays that aren't these.
+        let current = displayMonitor.currentConfiguration
+        if plan.requiresMatchingDisplays, preset.categoryKey != current.key {
+            Alerts.show(title: "Can't restore \u{201C}\(preset.name)\u{201D} on these displays",
+                        info: "It was saved for \(preset.displaySetupName), but you're on \(current.displayName).",
+                        style: .warning)
+            return
+        }
         // Peek for a restore in flight before launching apps; `reserve()` stays below.
         guard !DisplayArrangementApplier.isBusy else {
             NSLog("DeskStop ignoring re-entrant restore of '\(preset.name)' — one is already in flight")
             return
         }
-        let plan = preset.restorePlan
 
         // Launch apps even if icons can't be rearranged. Per-layout opt-in.
         if plan.launchesApps {
